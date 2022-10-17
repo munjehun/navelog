@@ -7,9 +7,16 @@ const ToastEditor = dynamic(() => import("../components/Editor"), {
 
 export default function write() {
   return (
-    <div>
-      <Title title="Write"></Title>
+    <div className="write-container">
+      <Title title="글쓰기"></Title>
       <ToastEditor />
+      <button type="button">저장</button>
+
+      <style jsx>{`
+        .write-container {
+          margin-left: 25px;
+        }
+      `}</style>
     </div>
   );
 }

@@ -23,14 +23,6 @@ function NavBar() {
       </div>
 
       <style jsx>{`
-        @font-face {
-          font-family: "Pretendard-Regular";
-          src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-            format("woff");
-          font-weight: 400;
-          font-style: normal;
-        }
-
         nav {
           background-color: #2b2b2b;
           height: 70px;
@@ -50,7 +42,6 @@ function NavBar() {
         }
 
         li {
-          font-family: "Pretendard-Regular";
           color: white;
           list-style: none;
           justify-content: space-between;

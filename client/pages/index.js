@@ -1,9 +1,10 @@
+import Postcard from "../components/Postcard";
 import Title from "../components/Title";
 
 export default function Home() {
   return (
     <div className="container">
-      <Title title="Home"></Title>
+      <Title title="홈"></Title>
 
       <div className="content-container">
         <h1>노트</h1>
@@ -19,85 +20,19 @@ export default function Home() {
         </form>
 
         <div className="contents-list">
-          <div className="content">
-            <div className="content-thumbnail">
-              <img src="/hamster.jpg" alt="content thumnail" />
-            </div>
-            <div className="content-preview">
-              <h2 className="content-title">제목</h2>
-              <span>날짜</span>
-              <p>
-                텍스트 내용
-                블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..
-              </p>
-            </div>
-          </div>
-
-          <div className="content">
-            <div className="content-thumbnail">
-              <img src="/hamster.jpg" alt="content thumnail" />
-            </div>
-            <div className="content-preview">
-              <h2 className="content-title">제목</h2>
-              <span>날짜</span>
-              <p>
-                텍스트 내용
-                블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..
-              </p>
-            </div>
-          </div>
-
-          <div className="content">
-            <div className="content-thumbnail">
-              <img src="/hamster.jpg" alt="content thumnail" />
-            </div>
-            <div className="content-preview">
-              <h2 className="content-title">제목</h2>
-              <span>날짜</span>
-              <p>
-                텍스트 내용
-                블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..
-              </p>
-            </div>
-          </div>
-
-          <div className="content">
-            <div className="content-thumbnail">
-              <img src="/hamster.jpg" alt="content thumnail" />
-            </div>
-            <div className="content-preview">
-              <h2 className="content-title">제목</h2>
-              <span>날짜</span>
-              <p>
-                텍스트
-                내용블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..텍스트
-                내용
-                블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..텍스트
-                내용
-                블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..텍스트
-                내용
-                블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..텍스트
-                내용라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..텍스트
-                내용라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..텍스트
-                내용
-              </p>
-            </div>
-          </div>
+          <Postcard id="1" />
+          <Postcard id="2" />
+          <Postcard id="3" />
+          <Postcard id="4" />
+          <Postcard id="5" />
+          <Postcard id="6" />
         </div>
       </div>
-      <style jsx>{`
-        @font-face {
-          font-family: "Pretendard-Regular";
-          src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-            format("woff");
-          font-weight: 400;
-          font-style: normal;
-        }
 
+      <style jsx>{`
         .container {
           display: flex;
           justify-content: flex-end;
-          font-family: "Pretendard-Regular";
         }
 
         form {
@@ -136,29 +71,6 @@ export default function Home() {
           width: 1200px;
           display: flex;
           flex-wrap: wrap; //nowrap이 기본
-        }
-
-        .content {
-          width: 370px;
-          height: 470px;
-          margin: 0 30px 30px 0;
-          background-color: rgb(176, 209, 204);
-          cursor: pointer;
-        }
-
-        .content-thumbnail {
-          width: 100%;
-          height: 200px;
-          overflow: hidden; //넘치는 위아래 부분 가려주기
-          /* position: relative; */
-        }
-
-        .content-thumbnail img {
-          width: 100%;
-        }
-
-        .content-preview {
-          margin: 30px;
         }
       `}</style>
     </div>
