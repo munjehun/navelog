@@ -7,7 +7,20 @@ function MyApp({ Component, pageProps }) {
     <>
       <NavBar />
       <Component {...pageProps} />
+      <div className="layout-left-bar"></div>
       {/* <Footer /> */}
+
+      <style jsx>{`
+        .layout-left-bar {
+          display: block;
+          width: 25px;
+          height: 100vh;
+          background: #2b2b2b;
+          position: fixed;
+          left: 0;
+          top: 0;
+        }
+      `}</style>
     </>
   );
 }
