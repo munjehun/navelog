@@ -1,10 +1,16 @@
 import { useRouter } from "next/router";
 import React from "react";
 import Title from "../../components/Title";
+import dynamic from "next/dynamic";
+
+const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
+  ssr: false,
+}); //ToastViewer 컴포넌트를 SSR을 CSR로 변경한 것!
 
 export default function Post() {
-  const router = useRouter();
-  console.log(router);
+  // const router = useRouter();
+  // console.log(router);
+
   return (
     <div className="post-container">
       <Title title="게시물 제목"></Title>
@@ -13,42 +19,15 @@ export default function Post() {
         <div className="post-header">
           <h1 className="post-title">제목제목 Lorem ipsum dolor sit.</h1>
           <span className="post-date">날짜짜장</span>
+          <span>해시태그도 넣어야겠지?</span>
         </div>
         <div className="post-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-          ducimus aut voluptate fugit ipsa, iure eum minus natus dicta
-          temporibus. Nulla sequi quidem culpa provident, repellat, repellendus
-          dolorum minima dolores voluptates vel dicta odit suscipit qui aperiam
-          ipsa asperiores non! Deserunt ut debitis cumque officia. Incidunt
-          quibusdam reiciendis nemo aperiam corporis iure, officia beatae itaque
-          consectetur. Impedit eaque in tenetur pariatur distinctio quae ducimus
-          odio cum temporibus a ab accusantium blanditiis ut, officiis velit
-          odit iure, excepturi mollitia. Ea obcaecati autem distinctio
-          accusantium, perspiciatis repudiandae saepe atque, quibusdam eveniet
-          quos, velit ipsa! Odio corrupti facere ipsam voluptatum odit unde vero
-          nulla quo soluta aspernatur numquam rem nisi iusto, omnis distinctio
-          tempora quos accusantium magnam libero. Ab atque voluptatibus a rerum
-          necessitatibus unde sunt. Facilis veritatis aspernatur, laboriosam nam
-          amet fugiat recusandae itaque!
-          <br />
-          <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-          ducimus aut voluptate fugit ipsa, iure eum minus natus dicta
-          temporibus. Nulla sequi quidem culpa provident, repellat, repellendus
-          dolorum minima dolores voluptates vel dicta odit suscipit qui aperiam
-          ipsa asperiores non! Deserunt ut debitis cumque officia. Incidunt
-          quibusdam reiciendis nemo aperiam corporis iure, officia beatae itaque
-          consectetur. Impedit eaque in tenetur pariatur distinctio quae ducimus
-          odio cum temporibus a ab accusantium blanditiis ut, officiis velit
-          odit iure, excepturi mollitia. Ea obcaecati autem distinctio
-          accusantium, perspiciatis repudiandae saepe atque, quibusdam eveniet
-          quos, velit ipsa! Odio corrupti facere ipsam voluptatum odit unde vero
-          nulla quo soluta aspernatur numquam rem nisi iusto, omnis distinctio
-          tempora quos accusantium magnam libero. Ab atque voluptatibus a rerum
-          necessitatibus unde sunt. Facilis veritatis aspernatur, laboriosam nam
-          amet fugiat recusandae itaque!
+          <ToastViewer />
         </div>
       </div>
+      <button type="button" className="edit-button">
+        수정하기
+      </button>
 
       <style jsx>{`
         .post-container {
@@ -60,6 +39,8 @@ export default function Post() {
           flex-direction: column;
           width: 720px;
           border-bottom: 2px solid black;
+          margin-bottom: 50px;
+          margin-left: 100px;
         }
         .post-header {
           border-top: 4px solid black;
@@ -76,7 +57,20 @@ export default function Post() {
           margin-left: 10px;
         }
         .post-content {
-          margin-bottom: 50px;
+          margin: 0 10px 50px 10px;
+        }
+        .edit-button {
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+          border: none;
+          background: rgb(176, 209, 204);
+          position: sticky;
+          top: 50%;
+          cursor: pointer;
+          font-family: "Pretendard-Regular";
+          font-size: 16px;
+          transform: translateY(-10px);
         }
       `}</style>
     </div>

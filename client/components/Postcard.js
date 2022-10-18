@@ -12,8 +12,9 @@ function Postcard({ id }) {
           <h2 className="content-title">제목</h2>
           <span>날짜</span>
           <p>
-            텍스트 내용
-            블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..블라블라..
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio,
+            cumque sunt. Corrupti ducimus tenetur, exercitationem nostrum
+            voluptates aliquid veritatis
           </p>
         </div>
 
