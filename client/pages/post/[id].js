@@ -17,14 +17,20 @@ export default function Post() {
 
       <div className="post">
         <div className="post-header">
-          <h1 className="post-title">제목제목 Lorem ipsum dolor sit.</h1>
+          <h1 className="post-title">제목제목</h1>
+          <div className="post-hashtag">
+            <li>블록체인</li>
+            <li>도커</li>
+            <li>사이드프로젝트</li>
+          </div>
           <span className="post-date">날짜짜장</span>
-          <span>해시태그도 넣어야겠지?</span>
         </div>
+
         <div className="post-content">
           <ToastViewer />
         </div>
       </div>
+
       <button type="button" className="edit-button">
         수정하기
       </button>
@@ -45,7 +51,7 @@ export default function Post() {
         .post-header {
           border-top: 4px solid black;
           border-bottom: 1px solid black;
-          margin: 50px 0;
+          margin: 30px 0;
         }
         .post-title {
           font-size: 2.5rem;
@@ -56,6 +62,21 @@ export default function Post() {
           margin-bottom: 15px;
           margin-left: 10px;
         }
+        .post-hashtag {
+          display: flex;
+          margin-bottom: 15px;
+
+          flex-wrap: wrap;
+          list-style: none;
+        }
+        .post-hashtag li {
+          background: rgb(176, 209, 204);
+          padding: 10px;
+          border-radius: 20px;
+          margin-left: 10px;
+          font-size: 14px;
+          letter-spacing: 0.05em;
+        }
         .post-content {
           margin: 0 10px 50px 10px;
         }
@@ -63,7 +84,7 @@ export default function Post() {
           height: 100px;
           width: 100px;
           border-radius: 50%;
-          border: none;
+          border: solid 2px rgb(176, 209, 204);
           background: rgb(176, 209, 204);
           position: sticky;
           top: 50%;
@@ -71,6 +92,11 @@ export default function Post() {
           font-family: "Pretendard-Regular";
           font-size: 16px;
           transform: translateY(-10px);
+          transition: all 0.2s;
+        }
+        .edit-button:hover {
+          background: rgba(176, 209, 204, 0.5);
+          border: #2b2b2b solid 2px;
         }
       `}</style>
     </div>
