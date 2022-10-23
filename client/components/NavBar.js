@@ -11,9 +11,6 @@ function NavBar() {
       <div>
         <ul>
           <li>
-            <a href="#">AAA</a>
-          </li>
-          <li>
             <a href="/write">글쓰기</a>
           </li>
           <li>
@@ -48,9 +45,10 @@ function NavBar() {
           list-style: none;
           justify-content: space-between;
           margin: 0 20px;
+          transition: all 0.2s;
         }
         li:hover {
-          color: rgb(167, 144, 183);
+          color: rgb(214, 164, 214);
         }
       `}</style>
     </nav>

@@ -6,7 +6,7 @@ const MyComponent = () => (
     <Editor
       placeholder="마크다운 텍스트를 입력해 보세요 📝"
       previewStyle="vertical"
-      height="600px"
+      height="750px"
       initialEditType="markdown"
       useCommandShortcut={true}
     />

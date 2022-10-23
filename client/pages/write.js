@@ -9,12 +9,41 @@ export default function write() {
   return (
     <div className="write-container">
       <Title title="글쓰기"></Title>
-      <ToastEditor />
-      <button type="button">저장</button>
+      <ToastEditor className="editor" />
+      <button type="button" className="save-button">
+        저장하기
+      </button>
 
-      <style jsx>{`
+      <style jsx global>{`
         .write-container {
           margin-left: 25px;
+          display: flex;
+          flex-direction: column;
+          /* align-items: center; */
+        }
+
+        .save-button {
+          display: block;
+          background: rgb(176, 209, 204);
+          border: solid 2px rgb(176, 209, 204);
+          border-radius: 50px;
+          padding: 12px;
+          margin-top: 10px;
+          width: 150px;
+          font-weight: 500;
+          font-size: 16px;
+          position: fixed;
+          top: 818px;
+          right: 50%;
+          transform: translateX(60%);
+          cursor: pointer;
+          transition: all 0.2s;
+          font-family: "Pretendard-Regular";
+          letter-spacing: 0.05em;
+        }
+        .save-button:hover {
+          background: rgba(176, 209, 204, 0.5);
+          border: solid 2px #2b2b2b;
         }
       `}</style>
     </div>

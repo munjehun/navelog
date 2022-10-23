@@ -20,7 +20,7 @@ function Postcard({ id }) {
 
         <style jsx>{`
           .content {
-            width: 370px;
+            width: 380px;
             height: 470px;
             margin: 0 30px 30px 0;
             background-color: rgb(176, 209, 204);
@@ -31,12 +31,13 @@ function Postcard({ id }) {
           .content-thumbnail {
             width: 100%;
             height: 200px;
-            overflow: hidden; //넘치는 위아래 부분 가려주기
-            /* position: relative; */
           }
 
           .content-thumbnail img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 이미지 비율 유지하면서 크기에 맞게 꽉 채우기 */
           }
 
           .content-preview {
