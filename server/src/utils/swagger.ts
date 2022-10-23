@@ -9,5 +9,6 @@ export function setupSwagger(app: INestApplication): void {
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
+  // swagger api docs url
   SwaggerModule.setup('api-docs', app, document);
 }
