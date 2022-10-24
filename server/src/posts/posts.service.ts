@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/CreatePostDto';
@@ -11,12 +11,23 @@ export class PostsService {
     @InjectRepository(Post)
     private postsRepository: Repository<Post>,
   ) {}
-  update(body: UpdatePostDto): string {
-    throw new Error('Method not implemented.');
+
+  async update(id: number, body: UpdatePostDto) {
+    const post: Post = await this.postsRepository.findOne({
+      where: { id: id, user_id: body.userId },
+    });
+    if (!post) {
+      throw new NotFoundException(`${id} not found`);
+    }
+    post.body = body.body;
+    post.title = body.title;
+    return await this.postsRepository.save(post);
   }
-  delete(id: string): string {
-    throw new Error('Method not implemented.');
+
+  async delete(id: number) {
+    await this.postsRepository.delete(id);
   }
+
   async create(body: CreatePostDto) {
     const newPost: Post = this.postsRepository.create({
       body: body.body,
@@ -25,10 +36,18 @@ export class PostsService {
     });
     await this.postsRepository.insert(newPost);
   }
-  getAll(): string {
-    throw new Error('Method not implemented.');
+
+  async getAll(): Promise<Post[]> {
+    return this.postsRepository.find();
   }
-  getOne(id: string): string {
-    return id;
+
+  async getOne(id: number): Promise<Post> {
+    const post: Post = await this.postsRepository.findOne({
+      where: { id: id },
+    });
+    if (!post) {
+      throw new NotFoundException(`${id} not found`);
+    }
+    return post;
   }
 }

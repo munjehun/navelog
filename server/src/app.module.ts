@@ -15,6 +15,7 @@ import 'dotenv/config';
       database: 'navelog',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      logging: true,
     }),
     UsersModule,
     PostsModule,

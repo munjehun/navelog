@@ -7,13 +7,11 @@ import {
   Param,
   Patch,
   Post,
-  Res,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/CreatePostDto';
 import { UpdatePostDto } from './dto/UpdatePostDto';
-import { DeletePostDto } from './dto/DeletePostDto';
 
 @Controller('posts')
 @ApiTags('게시글 API')
@@ -25,7 +23,7 @@ export class PostsController {
     summary: '게시글 전체 조회 API',
     description: '전체 게시글을 조회한다.',
   })
-  getAll(): string {
+  getAll() {
     return this.postService.getAll();
   }
 
@@ -34,7 +32,7 @@ export class PostsController {
     summary: '게시글 단건 조회 API',
     description: '게시글을 조회한다.',
   })
-  getOne(@Param('id') id: string): string {
+  getOne(@Param('id') id: number) {
     return this.postService.getOne(id);
   }
 
@@ -61,8 +59,8 @@ export class PostsController {
     description: '선택된 게시글을 수정한다.',
     type: UpdatePostDto,
   })
-  update(@Body() body: UpdatePostDto): string {
-    return this.postService.update(body);
+  update(@Param('id') id: number, @Body() body: UpdatePostDto) {
+    return this.postService.update(id, body);
   }
 
   @Delete(':id')
@@ -72,9 +70,8 @@ export class PostsController {
   })
   @ApiCreatedResponse({
     description: '선택된 게시글을 삭제한다.',
-    type: DeletePostDto,
   })
-  delete(@Param('id') id: string): string {
+  delete(@Param('id') id: number) {
     return this.postService.delete(id);
   }
 }
