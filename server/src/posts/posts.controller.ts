@@ -59,6 +59,7 @@ export class PostsController {
     description: '선택된 게시글을 수정한다.',
     type: UpdatePostDto,
   })
+  @HttpCode(200)
   update(@Param('id') id: number, @Body() body: UpdatePostDto) {
     return this.postService.update(id, body);
   }
@@ -71,6 +72,7 @@ export class PostsController {
   @ApiCreatedResponse({
     description: '선택된 게시글을 삭제한다.',
   })
+  @HttpCode(200)
   delete(@Param('id') id: number) {
     return this.postService.delete(id);
   }

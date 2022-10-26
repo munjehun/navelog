@@ -34,7 +34,10 @@ export class PostsService {
       title: body.title,
       user_id: body.userId,
     });
-    await this.postsRepository.insert(newPost);
+
+    const result = await this.postsRepository.insert(newPost);
+    // const newPostId = result.identifiers[0].id;
+    //TODO: hashtag 선언
   }
 
   async getAll(): Promise<Post[]> {
