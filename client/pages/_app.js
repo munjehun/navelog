@@ -1,14 +1,17 @@
-import Footer from "../components/footer";
+// import Footer from "../components/footer";
 import NavBar from "../components/NavBar";
 import "../styles/globals.css";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
-      <NavBar />
-      <Component {...pageProps} />
-      <div className="layout-left-bar"></div>
-      {/* <Footer /> */}
+      <SessionProvider session={session}>
+        <NavBar />
+        <Component {...pageProps} />
+        <div className="layout-left-bar"></div>
+        {/* <Footer /> */}
+      </SessionProvider>
 
       <style jsx>{`
         .layout-left-bar {
