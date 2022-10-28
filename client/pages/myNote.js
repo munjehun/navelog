@@ -1,44 +1,39 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import Postcard from "../components/Postcard";
 import Title from "../components/Title";
 
 export default function Home() {
-  // const [posts, setPosts] = useState([]);
-
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
-
-  // const getPosts = () => {
-  //   axios
-  //     .request({
-  //       method: "GET",
-  //       url: "http://localhost:3000/posts",
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setPosts(res);
-  //       console.log("posts :", posts);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const [hashtagOn, setHashtagOn] = useState(false);
 
   return (
     <div className="container">
-      <Title title="홈"></Title>
+      <Title title="나의 노트"></Title>
 
       <div className="content-container">
-        <h1>노트</h1>
-        <form action="POST">
+        <h1>나의 노트</h1>
+        <form action="get">
+          <button
+            type="button"
+            className="hashtag"
+            onClick={() => setHashtagOn((i) => !i)}
+          >
+            해시태그
+          </button>
           <input
             type="text"
             placeholder="노트 제목 검색"
-            className="hashtag-search"
+            className="note-search"
           />
         </form>
+        {hashtagOn ? (
+          <div className="hashtag-select">
+            <li>해시태그1</li>
+            <li>해시태그2</li>
+            <li>해시태그3</li>
+            <li>해시태그4</li>
+            <li>해시태그5</li>
+          </div>
+        ) : null}
 
         <div className="contents-list">
           <Postcard id="1" />
@@ -92,7 +87,7 @@ export default function Home() {
           background: rgb(176, 209, 204);
         }
 
-        .hashtag-search {
+        .note-search {
           border: solid 1.5px #d1d1d1;
           border-radius: 50px;
           width: 200px;

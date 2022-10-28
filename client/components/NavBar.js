@@ -17,10 +17,10 @@ function NavBar() {
           {session ? (
             <>
               <li>
-                <a href="/index">나의 노트</a>
+                <a href="/write">글쓰기</a>
               </li>
               <li>
-                <a href="/write">글쓰기</a>
+                <a href="/myNote">나의 노트</a>
               </li>
               <li id="userName">
                 <a href="/login">{session.user.name}</a>
