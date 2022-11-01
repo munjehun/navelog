@@ -8,4 +8,6 @@ export class User {
   email: string;
   @Column()
   nickname: string;
+  @Column()
+  image: string;
 }
