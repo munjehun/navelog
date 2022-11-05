@@ -1,4 +1,5 @@
-import { useRouter } from "next/router";
+import { useRouter, useEffect } from "next/router";
+import axios from "axios";
 import React from "react";
 import Title from "../../components/Title";
 import dynamic from "next/dynamic";
@@ -8,8 +9,28 @@ const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
 }); //ToastViewer 컴포넌트를 SSR을 CSR로 변경한 것!
 
 export default function Post() {
-  // const router = useRouter();
-  // console.log(router);
+  const router = useRouter();
+  console.log(router.query.id);
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  const getPost = () => {
+    axios
+      .request({
+        method: "GET",
+        url: `http://localhost:3000/posts/${router.query.id}`,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(console.log);
+  };
 
   return (
     <div className="post-container">

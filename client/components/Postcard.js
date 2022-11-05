@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import moment from "moment";
 
-function Postcard({ id }) {
+function Postcard({ id, title, date, content }) {
   return (
     <Link href={`/post/${id}`}>
       <div className="content" id={id}>
@@ -9,13 +10,9 @@ function Postcard({ id }) {
           <img src="/hamster.jpg" alt="content thumnail" />
         </div>
         <div className="content-preview">
-          <h2 className="content-title">제목</h2>
-          <span>날짜</span>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio,
-            cumque sunt. Corrupti ducimus tenetur, exercitationem nostrum
-            voluptates aliquid veritatis
-          </p>
+          <h2 className="content-title">{title}</h2>
+          <span>{moment(date).format("YYYY-MM-DD")}</span>
+          <p>{content}</p>
         </div>
 
         <style jsx>{`

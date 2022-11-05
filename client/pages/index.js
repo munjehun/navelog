@@ -4,27 +4,28 @@ import Postcard from "../components/Postcard";
 import Title from "../components/Title";
 
 export default function Home() {
-  // const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-  // const getPosts = () => {
-  //   axios
-  //     .request({
-  //       method: "GET",
-  //       url: "http://localhost:3000/posts",
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setPosts(res);
-  //       console.log("posts :", posts);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const getPosts = () => {
+    axios
+      .request({
+        method: "GET",
+        url: "http://localhost:3000/posts",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setPosts(res.data);
+      })
+      .catch(console.log);
+  };
 
   return (
     <div className="container">
@@ -35,22 +36,27 @@ export default function Home() {
         <form action="POST">
           <input
             type="text"
-            placeholder="노트 제목 검색"
+            placeholder="해시태그 검색"
             className="hashtag-search"
           />
         </form>
 
         <div className="contents-list">
-          <Postcard id="1" />
-          <Postcard id="2" />
-          <Postcard id="3" />
-          <Postcard id="4" />
-          <Postcard id="5" />
-          <Postcard id="6" />
+          {posts.map((post, index) => {
+            return (
+              <Postcard
+                id={post.id}
+                key={index}
+                title={post.title}
+                date={post.createdAt}
+                content={post.body}
+              />
+            );
+          })}
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .container {
           display: flex;
           justify-content: flex-end;

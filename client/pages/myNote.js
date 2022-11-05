@@ -21,7 +21,7 @@ export default function Home() {
           </button>
           <input
             type="text"
-            placeholder="노트 제목 검색"
+            placeholder="해시태그 검색"
             className="note-search"
           />
         </form>
