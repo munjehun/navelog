@@ -36,6 +36,27 @@ export default function write() {
     [hashArr]
   );
 
+  // const handleEditor = () => {
+  //   const editorBody = editor.getMarkdown();
+
+  //   axios
+  //     .request({
+  //       method: "POST",
+  //       url: "http://localhost:3000/posts",
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setPosts(res.data);
+  //     })
+  //     .catch(console.log);
+  // };
+
+  console.log(ToastEditor.getMarkdown());
+
   return (
     <div className="write-container">
       <Title title="글쓰기"></Title>
