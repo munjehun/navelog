@@ -3,8 +3,8 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Title from "../components/Title";
 
 function login() {
-  const { data, data: session, status } = useSession();
-  console.log(status, data);
+  const { data: session } = useSession();
+  console.log(session);
 
   return (
     <div className="login-container">
@@ -14,7 +14,7 @@ function login() {
         <div className="login-box">
           <h1>{session.user.name} (으)로 로그인 되었습니다.</h1>
           <button className="login-btn" onClick={() => signOut()}>
-            로그아웃!
+            로그아웃 !
           </button>
         </div>
       ) : (

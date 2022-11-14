@@ -28,7 +28,6 @@ const MyComponent = () => {
     (e) => {
       if (e.keyCode == "13" || e.keyCode == "32") {
         setHashtag("");
-        console.log(hashArr);
       }
     },
     [hashArr]
@@ -45,14 +44,12 @@ const MyComponent = () => {
     console.log("해시태그 :", hashArr);
   };
 
-  console.log(postTitle);
-
   return (
     <>
       <input
         className="write-title"
         type="text"
-        placeholder="제목을 입력하세요."
+        placeholder="제목을 입력하세요 ✍️"
         value={postTitle}
         onChange={(e) => setPostTitle(e.target.value)}
       />
@@ -60,7 +57,7 @@ const MyComponent = () => {
         ref={editorRef}
         placeholder="마크다운 텍스트를 입력해 보세요 📝"
         previewStyle="vertical"
-        height="750px"
+        height="80vh"
         initialEditType="markdown"
         useCommandShortcut={true}
       />
@@ -117,6 +114,13 @@ const MyComponent = () => {
           font-size: 20px;
           font-weight: 700;
           letter-spacing: 0.05em;
+          border: none;
+          border-bottom: solid 5px #2b2b2b;
+          transition: all 0.2s ease-out;
+        }
+        .write-title:focus {
+          outline: none;
+          border-bottom: solid 5px rgb(176, 209, 204);
         }
 
         .save-button {
