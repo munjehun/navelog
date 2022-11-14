@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Title from "../components/Title";
+import axios from "axios";
 
 function login() {
   const { data: session } = useSession();
   console.log(session);
+
+  useEffect(() => {
+    if (session) {
+      postLogin();
+    }
+  }, [session]);
+
+  const postLogin = () => {
+    axios
+      .request({
+        method: "POST",
+        url: "http://localhost:3001/users/login",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        data: {
+          email: session.user.email,
+          nickname: session.user.name,
+          image: session.user.image,
+        },
+      })
+      .catch(console.log);
+  };
 
   return (
     <div className="login-container">
@@ -14,14 +38,14 @@ function login() {
         <div className="login-box">
           <h1>{session.user.name} (으)로 로그인 되었습니다.</h1>
           <button className="login-btn" onClick={() => signOut()}>
-            로그아웃 !
+            로그아웃
           </button>
         </div>
       ) : (
         <div className="login-box">
           <h1> 로그인 하기 </h1>
           <button className="login-btn" onClick={() => signIn("Github Login")}>
-            로그인!
+            로그인
           </button>
         </div>
       )}

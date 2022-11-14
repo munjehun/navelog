@@ -14,10 +14,9 @@ export default function Home() {
     axios
       .request({
         method: "GET",
-        url: "http://localhost:3000/posts",
+        url: "http://localhost:3001/posts",
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
         },
       })
       .then((res) => {
