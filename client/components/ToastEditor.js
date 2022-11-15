@@ -1,14 +1,19 @@
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
+import axios from "axios";
 import { useRef } from "react";
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const MyComponent = () => {
   const [hashtag, setHashtag] = useState("");
   const [hashArr, setHashArr] = useState([]);
   const [postTitle, setPostTitle] = useState("");
+  let userId = localStorage.getItem("userId");
 
   const editorRef = useRef();
+
+  const router = useRouter();
 
   const onKeyDown = useCallback(
     (e) => {
@@ -34,14 +39,34 @@ const MyComponent = () => {
   );
 
   const handleSaveButton = () => {
-    // 제목 가져오기
-    console.log("제목 :", postTitle);
-    // 입력창에 입력한 내용을 HTML 태그 형태로 취득
-    console.log(editorRef.current?.getInstance().getHTML());
-    // 입력창에 입력한 내용을 MarkDown 형태로 취득
-    console.log(editorRef.current?.getInstance().getMarkdown());
-    // 해시태그 가져오기
-    console.log("해시태그 :", hashArr);
+    axios
+      .request({
+        method: "POST",
+        url: "http://localhost:3001/posts",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        data: {
+          title: postTitle,
+          body: editorRef.current?.getInstance().getMarkdown(),
+          userId: userId,
+          hashtags: hashArr,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        router.push("/");
+      })
+      .catch(console.log);
+
+    // // 제목 가져오기
+    // console.log("제목 :", postTitle);
+    // // 입력창에 입력한 내용을 HTML 태그 형태로 취득
+    // console.log(editorRef.current?.getInstance().getHTML());
+    // // 입력창에 입력한 내용을 MarkDown 형태로 취득
+    // console.log(editorRef.current?.getInstance().getMarkdown());
+    // // 해시태그 가져오기
+    // console.log("해시태그 :", hashArr);
   };
 
   return (
@@ -65,7 +90,9 @@ const MyComponent = () => {
         <button
           type="button"
           className="save-button"
-          onClick={handleSaveButton}
+          onClick={() => {
+            handleSaveButton();
+          }}
         >
           저장하기
         </button>
