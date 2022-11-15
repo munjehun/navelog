@@ -27,6 +27,9 @@ function login() {
           image: session.user.image,
         },
       })
+      .then((res) => {
+        localStorage.setItem("userId", res.data.id);
+      })
       .catch(console.log);
   };
 
