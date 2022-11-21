@@ -1,36 +1,16 @@
-import { useRouter, useEffect } from "next/router";
 import axios from "axios";
 import React from "react";
 import Title from "../../components/Title";
 import dynamic from "next/dynamic";
+import moment from "moment";
+// import { Viewer } from "@toast-ui/react-editor";
 
 const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
   ssr: false,
 }); //ToastViewer 컴포넌트를 SSR을 CSR로 변경한 것!
 
-export default function Post() {
-  const router = useRouter();
-  console.log(router.query.id);
-
-  useEffect(() => {
-    getPost();
-  }, []);
-
-  const getPost = () => {
-    axios
-      .request({
-        method: "GET",
-        url: `http://localhost:3000/posts/${router.query.id}`,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(console.log);
-  };
+export default function Post({ data }) {
+  console.log(data);
 
   return (
     <div className="post-container">
@@ -38,17 +18,19 @@ export default function Post() {
 
       <div className="post">
         <div className="post-header">
-          <h1 className="post-title">제목제목</h1>
+          <h1 className="post-title">{data.title}</h1>
           <div className="post-hashtag">
             <li>블록체인</li>
             <li>도커</li>
             <li>사이드프로젝트</li>
           </div>
-          <span className="post-date">날짜짜장</span>
+          <span className="post-date">
+            {moment(data.createDate).format("YYYY-MM-DD")}
+          </span>
         </div>
 
         <div className="post-content">
-          <ToastViewer />
+          <ToastViewer body={data.body} />
         </div>
       </div>
 
@@ -122,4 +104,15 @@ export default function Post() {
       `}</style>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  var { id } = context.query;
+
+  const res = await axios.get(`http://localhost:3001/posts/${id}`);
+  const data = res.data;
+
+  return {
+    props: { data },
+  };
 }

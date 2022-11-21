@@ -20,7 +20,7 @@ export default function Home() {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        console.log("홈 페이지 (전체 노트) :", res.data.reverse());
         setPosts(res.data);
       })
       .catch(console.log);
