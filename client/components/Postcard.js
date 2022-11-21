@@ -1,6 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import moment from "moment";
+import dynamic from "next/dynamic";
+
+const ToastViewer = dynamic(() => import("../components/ToastViewer"), {
+  ssr: false,
+});
 
 function Postcard({ id, title, date, content }) {
   return (
@@ -12,7 +17,9 @@ function Postcard({ id, title, date, content }) {
         <div className="content-preview">
           <h2 className="content-title">{title}</h2>
           <span>{moment(date).format("YYYY-MM-DD")}</span>
-          <p>{content}</p>
+          <div className="content-content">
+            <ToastViewer body={content} />
+          </div>
         </div>
 
         <style jsx>{`
@@ -39,6 +46,13 @@ function Postcard({ id, title, date, content }) {
 
           .content-preview {
             margin: 30px;
+          }
+
+          .content-content {
+            display: block;
+            overflow: hidden;
+            height: 150px;
+            line-height: 1.2;
           }
         `}</style>
       </div>
