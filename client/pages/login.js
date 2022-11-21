@@ -40,7 +40,13 @@ function login() {
       {session ? (
         <div className="login-box">
           <h1>{session.user.name} (으)로 로그인 되었습니다.</h1>
-          <button className="login-btn" onClick={() => signOut()}>
+          <button
+            className="login-btn"
+            onClick={() => {
+              signOut();
+              localStorage.clear();
+            }}
+          >
             로그아웃
           </button>
         </div>
