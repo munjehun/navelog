@@ -3,7 +3,6 @@ import React from "react";
 import Title from "../../components/Title";
 import dynamic from "next/dynamic";
 import moment from "moment";
-// import { Viewer } from "@toast-ui/react-editor";
 
 const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
   ssr: false,
@@ -14,7 +13,7 @@ export default function Post({ data }) {
 
   return (
     <div className="post-container">
-      <Title title="게시물 제목"></Title>
+      <Title title={`${data.title.slice(0, 10)}..`}></Title>
 
       <div className="post">
         <div className="post-header">
@@ -34,14 +33,24 @@ export default function Post({ data }) {
         </div>
       </div>
 
-      <button type="button" className="edit-button">
-        수정하기
-      </button>
+      <div className="button-container">
+        <button type="button" className="button edit-button">
+          수정
+        </button>
+        <button
+          type="button"
+          className="button delete-button"
+          onClick={() => confirm("노트를 삭제하시겠습니까?")}
+        >
+          삭제
+        </button>
+      </div>
 
       <style jsx>{`
         .post-container {
           display: flex;
           justify-content: center;
+          position: relative;
         }
         .post {
           display: flex;
@@ -82,24 +91,43 @@ export default function Post({ data }) {
         }
         .post-content {
           margin: 0 10px 50px 10px;
+          line-height: 1.6;
         }
-        .edit-button {
-          height: 100px;
-          width: 100px;
-          border-radius: 50%;
-          border: solid 2px rgb(176, 209, 204);
-          background: rgb(176, 209, 204);
+
+        .button-container {
+          height: 200px;
+          transform: translateY(-10%);
+          display: flex;
+          flex-direction: column;
           position: sticky;
           top: 50%;
+        }
+        .button {
+          display: block;
+          height: 60px;
+          width: 80px;
+          border-radius: 50px;
+          border: solid 2px rgb(176, 209, 204);
+          background: rgb(176, 209, 204);
           cursor: pointer;
           font-family: "Pretendard-Regular";
           font-size: 16px;
-          transform: translateY(-10px);
           transition: all 0.2s;
         }
-        .edit-button:hover {
+        .button:hover {
           background: rgba(176, 209, 204, 0.5);
           border: #2b2b2b solid 2px;
+        }
+
+        .edit-button {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          padding-top: 20px;
+        }
+        .delete-button {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          padding-bottom: 20px;
         }
       `}</style>
     </div>
