@@ -3,13 +3,28 @@ import React from "react";
 import Title from "../../components/Title";
 import dynamic from "next/dynamic";
 import moment from "moment";
+import { useRouter } from "next/router";
 
 const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
   ssr: false,
 }); //ToastViewer 컴포넌트를 SSR을 CSR로 변경한 것!
 
 export default function Post({ data }) {
+  const router = useRouter();
   console.log(data);
+
+  const postDelete = () => {
+    axios
+      .request({
+        method: "DELETE",
+        url: `http://localhost:3001/posts/${data.id}`,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then(console.log)
+      .catch(console.log);
+  };
 
   return (
     <div className="post-container">
@@ -40,7 +55,10 @@ export default function Post({ data }) {
         <button
           type="button"
           className="button delete-button"
-          onClick={() => confirm("노트를 삭제하시겠습니까?")}
+          onClick={() => {
+            postDelete();
+            router.push("/");
+          }}
         >
           삭제
         </button>
