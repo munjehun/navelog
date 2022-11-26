@@ -53,4 +53,14 @@ export class PostsService {
     }
     return post;
   }
+
+  async getUserPostList(id: number) {
+    const post: Post[] = await this.postsRepository.find({
+      where: { user_id: id },
+    });
+    if (!post) {
+      throw new NotFoundException(`user ${id} not found`);
+    }
+    return post;
+  }
 }
