@@ -36,6 +36,15 @@ export class PostsController {
     return this.postService.getOne(id);
   }
 
+  @Get('/user/:id')
+  @ApiOperation({
+    summary: '사용자별 게시글 조회 API',
+    description: '사용자가 작성한 게시글을 조회한다.',
+  })
+  getUserPostList(@Param('id') id: number) {
+    return this.postService.getUserPostList(id);
+  }
+
   @Post()
   @ApiOperation({
     summary: '게시글 작성 API',
