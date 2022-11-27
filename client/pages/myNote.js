@@ -1,9 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Postcard from "../components/Postcard";
 import Title from "../components/Title";
+import axios from "axios";
 
 export default function Home() {
+  let user_id;
+
   const [hashtagOn, setHashtagOn] = useState(false);
+  if (typeof window !== "undefined") {
+    user_id = localStorage.getItem("userId");
+  }
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const getPosts = () => {
+    axios
+      .request({
+        method: "GET",
+        url: `http://localhost:3001/posts/user/${user_id}`,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        console.log("나의 노트 :", res.data.reverse());
+        setPosts(res.data);
+      })
+      .catch(console.log);
+  };
 
   return (
     <div className="container">
@@ -36,12 +64,17 @@ export default function Home() {
         ) : null}
 
         <div className="contents-list">
-          <Postcard id="1" />
-          <Postcard id="2" />
-          <Postcard id="3" />
-          <Postcard id="4" />
-          <Postcard id="5" />
-          <Postcard id="6" />
+          {posts.map((post, index) => {
+            return (
+              <Postcard
+                id={post.id}
+                key={index}
+                title={post.title}
+                date={post.createdAt}
+                content={post.body}
+              />
+            );
+          })}
         </div>
       </div>
 

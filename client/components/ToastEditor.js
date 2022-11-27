@@ -2,7 +2,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import axios from "axios";
 import { useRef } from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 
 const MyComponent = () => {
@@ -31,7 +31,9 @@ const MyComponent = () => {
 
   const onKeyUp = useCallback(
     (e) => {
-      if (e.keyCode == "13" || e.keyCode == "32") {
+      const KEY_ENTER = "13";
+      const KEY_SPACEBAR = "32";
+      if (e.keyCode == KEY_ENTER || e.keyCode == KEY_SPACEBAR) {
         setHashtag("");
       }
     },

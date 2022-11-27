@@ -125,7 +125,7 @@ export default function Post({ data }) {
           height: 60px;
           width: 80px;
           border-radius: 50px;
-          border: solid 2px rgb(176, 209, 204);
+          border: none;
           background: rgb(176, 209, 204);
           cursor: pointer;
           font-family: "Pretendard-Regular";
@@ -134,7 +134,6 @@ export default function Post({ data }) {
         }
         .button:hover {
           background: rgba(176, 209, 204, 0.5);
-          border: #2b2b2b solid 2px;
         }
 
         .edit-button {
