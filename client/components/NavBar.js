@@ -8,7 +8,7 @@ function NavBar() {
   return (
     <nav>
       <Link href="/">
-        <a>
+        <a className="navelog-logo">
           <img src="/navelog-logo.png" alt="navelog logo" />
         </a>
       </Link>
@@ -42,17 +42,23 @@ function NavBar() {
       <style jsx>{`
         nav {
           background-color: #2b2b2b;
+          width: 100%;
           height: 70px;
           display: flex;
           justify-content: space-between;
           align-items: center;
           position: sticky;
           top: 0;
+          z-index: 1; //게시물에서 보면 게시물이 네비바 위로 겹쳐지므로
         }
 
-        img {
-          margin: 5px 60px 0;
+        .navelog-logo {
           width: 200px;
+          margin: 5px 60px 0;
+          padding: 5px;
+        }
+        img {
+          width: 100%;
         }
 
         ul {

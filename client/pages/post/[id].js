@@ -26,6 +26,12 @@ export default function Post({ data }) {
       .catch(console.log);
   };
 
+  const deleteConfirm = () => {
+    if (window.confirm("노트를 삭제하겠습니까?")) {
+      postDelete();
+      router.push("/");
+    }
+  };
   return (
     <div className="post-container">
       <Title title={`${data.title.slice(0, 10)}..`}></Title>
@@ -56,8 +62,8 @@ export default function Post({ data }) {
           type="button"
           className="button delete-button"
           onClick={() => {
-            postDelete();
-            router.push("/");
+            deleteConfirm();
+            // router.push("/");
           }}
         >
           삭제
@@ -113,12 +119,13 @@ export default function Post({ data }) {
         }
 
         .button-container {
-          height: 200px;
+          height: 120px;
           transform: translateY(-10%);
           display: flex;
           flex-direction: column;
           position: sticky;
           top: 50%;
+          margin-left: 20px;
         }
         .button {
           display: block;
