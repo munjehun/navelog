@@ -4,6 +4,7 @@ import Title from "../../components/Title";
 import dynamic from "next/dynamic";
 import moment from "moment";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
   ssr: false,
@@ -55,9 +56,11 @@ export default function Post({ data }) {
       </div>
 
       <div className="button-container">
-        <button type="button" className="button edit-button">
-          수정
-        </button>
+        <Link href={`/edit/${data.id}`}>
+          <button type="button" className="button edit-button">
+            수정
+          </button>
+        </Link>
         <button
           type="button"
           className="button delete-button"
@@ -159,7 +162,7 @@ export default function Post({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  var { id } = context.query;
+  let { id } = context.query;
 
   const res = await axios.get(`http://localhost:3001/posts/${id}`);
   const data = res.data;

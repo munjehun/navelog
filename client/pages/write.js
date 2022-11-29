@@ -12,14 +12,13 @@ export default function write() {
     <div className="write-container">
       <Title title="글쓰기"></Title>
 
-      <ToastEditor className="editor" />
+      <ToastEditor />
 
-      <style jsx global>{`
+      <style jsx>{`
         .write-container {
           margin-left: 25px;
           display: flex;
           flex-direction: column;
-          /* align-items: center; */
         }
       `}</style>
     </div>

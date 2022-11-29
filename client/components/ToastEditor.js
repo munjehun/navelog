@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 
-const MyComponent = () => {
+const MyComponent = ({ title, postId, body }) => {
   const [hashtag, setHashtag] = useState("");
   const [hashArr, setHashArr] = useState([]);
   const [postTitle, setPostTitle] = useState("");
@@ -77,7 +77,7 @@ const MyComponent = () => {
         className="write-title"
         type="text"
         placeholder="제목을 입력하세요 ✍️"
-        value={postTitle}
+        defaultValue={title}
         onChange={(e) => setPostTitle(e.target.value)}
       />
       <Editor
@@ -129,12 +129,6 @@ const MyComponent = () => {
       </div>
 
       <style jsx global>{`
-        .write-container {
-          margin-left: 25px;
-          display: flex;
-          flex-direction: column;
-          /* align-items: center; */
-        }
         .write-title {
           display: block;
           height: 50px;
@@ -198,7 +192,6 @@ const MyComponent = () => {
           background: rgba(176, 209, 204, 0.3);
         }
       `}</style>
-      <style jsx>{``}</style>
     </>
   );
 };
