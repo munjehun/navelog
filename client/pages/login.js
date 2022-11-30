@@ -52,7 +52,7 @@ function login() {
         </div>
       ) : (
         <div className="login-box">
-          <h1> 로그인 하기 </h1>
+          <h1> Github 계정으로 로그인 하기 </h1>
           <button className="login-btn" onClick={() => signIn("Github Login")}>
             로그인
           </button>

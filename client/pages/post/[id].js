@@ -11,6 +11,7 @@ const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
 }); //ToastViewer 컴포넌트를 SSR을 CSR로 변경한 것!
 
 export default function Post({ data }) {
+  const userId = localStorage.getItem("userId");
   const router = useRouter();
   console.log(data);
 
@@ -30,7 +31,7 @@ export default function Post({ data }) {
   const deleteConfirm = () => {
     if (window.confirm("노트를 삭제하겠습니까?")) {
       postDelete();
-      router.push("/");
+      router.push("/myNote");
     }
   };
   return (
@@ -55,23 +56,25 @@ export default function Post({ data }) {
         </div>
       </div>
 
-      <div className="button-container">
-        <Link href={`/edit/${data.id}`}>
-          <button type="button" className="button edit-button">
-            수정
+      {userId ? (
+        <div className="button-container">
+          <Link href={`/edit/${data.id}`}>
+            <button type="button" className="button edit-button">
+              수정
+            </button>
+          </Link>
+          <button
+            type="button"
+            className="button delete-button"
+            onClick={() => {
+              deleteConfirm();
+              // router.push("/");
+            }}
+          >
+            삭제
           </button>
-        </Link>
-        <button
-          type="button"
-          className="button delete-button"
-          onClick={() => {
-            deleteConfirm();
-            // router.push("/");
-          }}
-        >
-          삭제
-        </button>
-      </div>
+        </div>
+      ) : null}
 
       <style jsx>{`
         .post-container {

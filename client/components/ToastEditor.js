@@ -1,15 +1,19 @@
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import axios from "axios";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 
 const MyComponent = ({ title, postId, body }) => {
   const [hashtag, setHashtag] = useState("");
   const [hashArr, setHashArr] = useState([]);
-  const [postTitle, setPostTitle] = useState("");
-  let userId = localStorage.getItem("userId");
+  const [postTitle, setPostTitle] = useState(title);
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    editorRef.current?.getInstance().setMarkdown(body);
+  }, []);
 
   const editorRef = useRef();
 
@@ -57,7 +61,7 @@ const MyComponent = ({ title, postId, body }) => {
       })
       .then((res) => {
         console.log(res);
-        router.push("/");
+        router.push("/myNote");
       })
       .catch(console.log);
 
@@ -71,13 +75,36 @@ const MyComponent = ({ title, postId, body }) => {
     // console.log("해시태그 :", hashArr);
   };
 
+  const handleEditButton = () => {
+    axios
+      .request({
+        method: "PATCH",
+        url: `http://localhost:3001/posts/${postId}`,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        data: {
+          id: postId,
+          userId: userId,
+          title: postTitle,
+          body: editorRef.current?.getInstance().getMarkdown(),
+          hashtags: hashArr,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        router.push("/myNote");
+      })
+      .catch(console.log);
+  };
+
   return (
     <>
       <input
         className="write-title"
         type="text"
         placeholder="제목을 입력하세요 ✍️"
-        defaultValue={title}
+        value={postTitle}
         onChange={(e) => setPostTitle(e.target.value)}
       />
       <Editor
@@ -93,10 +120,16 @@ const MyComponent = ({ title, postId, body }) => {
           type="button"
           className="save-button"
           onClick={() => {
-            handleSaveButton();
+            !postTitle
+              ? alert("제목을 입력해주세요.")
+              : !editorRef.current?.getInstance().getMarkdown()
+              ? alert("내용을 입력해주세요.")
+              : postId
+              ? handleEditButton()
+              : handleSaveButton();
           }}
         >
-          저장하기
+          {postId ? `수정하기` : `저장하기`}
         </button>
 
         {hashArr.map((hash, index) => {
