@@ -4,9 +4,9 @@ import Title from "../components/Title";
 import axios from "axios";
 
 export default function Home() {
-  let user_id;
-
   const [hashtagOn, setHashtagOn] = useState(false);
+
+  let user_id;
   if (typeof window !== "undefined") {
     user_id = localStorage.getItem("userId");
   }
@@ -27,8 +27,10 @@ export default function Home() {
         },
       })
       .then((res) => {
-        console.log("나의 노트 :", res.data.reverse());
-        setPosts(res.data);
+        const notes = res.data.sort((a, b) => b.id - a.id);
+
+        console.log("나의 노트 :", notes);
+        setPosts(notes);
       })
       .catch(console.log);
   };

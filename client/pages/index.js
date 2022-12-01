@@ -20,8 +20,9 @@ export default function Home() {
         },
       })
       .then((res) => {
-        console.log("홈 페이지 (전체 노트) :", res.data.reverse());
-        setPosts(res.data);
+        const notes = res.data.sort((a, b) => b.id - a.id);
+        console.log("전체 노트 :", notes);
+        setPosts(notes);
       })
       .catch(console.log);
   };
