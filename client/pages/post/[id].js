@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "../../components/Title";
 import dynamic from "next/dynamic";
 import moment from "moment";
@@ -11,7 +11,11 @@ const ToastViewer = dynamic(() => import("../../components/ToastViewer"), {
 }); //ToastViewer 컴포넌트를 SSR을 CSR로 변경한 것!
 
 export default function Post({ data }) {
-  const userId = localStorage.getItem("userId");
+  let user_id;
+  if (typeof window !== "undefined") {
+    user_id = localStorage.getItem("userId");
+  }
+
   const router = useRouter();
   console.log(data);
 
@@ -56,7 +60,7 @@ export default function Post({ data }) {
         </div>
       </div>
 
-      {userId ? (
+      {user_id ? (
         <div className="button-container">
           <Link href={`/edit/${data.id}`}>
             <button type="button" className="button edit-button">
