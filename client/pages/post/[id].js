@@ -80,7 +80,7 @@ export default function Post({ data }) {
         </div>
       ) : null}
 
-      <style jsx>{`
+      <style jsx global>{`
         .post-container {
           display: flex;
           justify-content: center;
@@ -91,7 +91,7 @@ export default function Post({ data }) {
           flex-direction: column;
           width: 720px;
           border-bottom: 2px solid black;
-          margin-bottom: 50px;
+          margin-bottom: 100px;
           margin-left: 100px;
         }
         .post-header {
@@ -126,6 +126,16 @@ export default function Post({ data }) {
         .post-content {
           margin: 0 10px 50px 10px;
           line-height: 1.6;
+          min-height: 50vh;
+        }
+
+        .post-content img {
+          max-width: 100%;
+        }
+
+        .post-content code {
+          display: block;
+          max-width: 100%;
         }
 
         .button-container {
